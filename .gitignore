@@ -15,3 +15,10 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+.idea/
+
+## MAC OS
+.DS_Store
+.Trashes
+.com.apple.timemachine.supported
+.fseventsd
