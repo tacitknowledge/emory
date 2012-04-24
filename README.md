@@ -1,6 +1,6 @@
 # Emory
 
-TODO: Write a gem description
+The Emory gem listens to file modifications and runs an action against it (for example, upload to a remote location).
 
 ## Installation
 
@@ -27,3 +27,9 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Authors
+
+* [Scott Askew](https://github.com/scottfromsf)
+* [Vladislav Gangan](https://github.com/vgangan)
+* [Ion Lenta](https://github.com/noi)
