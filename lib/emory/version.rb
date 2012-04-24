@@ -1,0 +1,3 @@
+module Emory
+  VERSION = "0.0.1"
+end
