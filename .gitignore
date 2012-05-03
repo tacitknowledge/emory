@@ -16,6 +16,7 @@ test/tmp
 test/version_tmp
 tmp
 .idea/
+.project
 
 ## MAC OS
 .DS_Store
