@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description   = 'The Emory gem listens to file modifications and runs an action against it (for example, upload to a remote location)'
 
   s.files         = `git ls-files`.split($\)
-  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.executables   = %w(emory)
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ["lib"]
 end
