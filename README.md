@@ -6,19 +6,38 @@ The Emory gem listens to file modifications and runs an action against it (for e
 
 Add this line to your application's Gemfile:
 
+``` ruby
     gem 'emory'
+```
 
 And then execute:
 
+``` bash
     $ bundle
+```
 
 Or install it yourself as:
 
+``` bash
     $ gem install emory
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Emory is run from a command line. Please open your terminal and go to your project work directory.
+
+There you would need to create Emory config file `.emory` which in fact is nothing more than regular
+Ruby code wrapped in gem's configuration DSL.
+
+TODO: Show example configuration
+
+The gem supplies an executable file which scans for the configuration file in current directory
+(and up the path if not found), configures itself and launches the process. If you need to terminate
+execution then proceed like your operating system allows you to (Ctrl-C, for example).
+
+``` bash
+    $ emory
+```
 
 ## Contributing
 
