@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 
   s.files         = `git ls-files`.split($\)
   s.executables   = %w(emory)
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  s.test_files    = Dir.glob("{spec,test}/**/*.rb")
   s.require_paths = ["lib"]
+  
+  s.add_development_dependency 'rspec', '~> 2.10'
 end
