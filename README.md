@@ -4,7 +4,7 @@ The Emory gem listens to file modifications and runs an action against it (for e
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's `Gemfile`:
 
 ``` ruby
     gem 'emory'
@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ## Usage
 
-Emory is run from a command line. Please open your terminal and go to your project work directory.
+Emory is run from the command line. Please open your terminal and go to your project's work directory.
 
 There you would need to create Emory config file `.emory` which in fact is nothing more than regular
 Ruby code wrapped in gem's configuration DSL.
