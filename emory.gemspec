@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   s.add_development_dependency 'rspec', '~> 2.10'
+  s.add_development_dependency 'simplecov', '~> 0.6.2'
 end
