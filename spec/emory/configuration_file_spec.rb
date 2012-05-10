@@ -43,8 +43,8 @@ module Emory
       end
       
       it 'should find configuration file in parent directory of current directory' do
-        parent_directory = '/root/sources'
-        file_full_path = parent_directory + '/' + @configuration_file_name
+        parent_directory = File.expand_path("..", @current_path)
+        file_full_path = File.expand_path(@configuration_file_name, parent_directory)
         File.should_receive(:exists?).twice.and_return(false, true)
         
         ConfigurationFile.should_receive(:puts).with(@start_search_info % @configuration_file_name)
