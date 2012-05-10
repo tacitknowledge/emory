@@ -33,7 +33,7 @@ module Emory
       
       it 'should find configuration file in current directory' do
         file_full_path = @current_path + '/' + @configuration_file_name
-        File.should_receive(:exists?).once.and_return(true)
+        File.should_receive(:exists?).and_return(true)
         
         ConfigurationFile.should_receive(:puts).with(@start_search_info % @configuration_file_name)
         ConfigurationFile.should_receive(:puts).with(@search_info % @current_path)
