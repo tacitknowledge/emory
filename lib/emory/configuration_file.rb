@@ -11,6 +11,7 @@ module Emory
         else
           # TODO: raise error
           puts "configuration file found: #{file}"
+          file
         end
       end
       
