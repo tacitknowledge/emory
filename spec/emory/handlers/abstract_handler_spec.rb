@@ -24,11 +24,11 @@ module Emory
                                /This method is not implemented: Emory::Handlers::AbstractHandler#modified/)
         end
 
-        it "'deleted' raises NotImplementedError" do
+        it "'removed' raises NotImplementedError" do
           proc {
-            @handler.deleted
+            @handler.removed
           }.should raise_error(NotImplementedError,
-                               /This method is not implemented: Emory::Handlers::AbstractHandler#deleted/)
+                               /This method is not implemented: Emory::Handlers::AbstractHandler#removed/)
         end
       end
     end

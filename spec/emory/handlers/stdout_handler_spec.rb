@@ -22,10 +22,10 @@ module Emory
           @handler.modified '/path/to/file'
         end
 
-        it "'deleted' just calls 'puts' with right params" do
+        it "'removed' just calls 'puts' with right params" do
           @handler.stub!(:puts)
-          @handler.should_receive(:puts).with("The file '/path/to/file' was 'deleted'")
-          @handler.deleted '/path/to/file'
+          @handler.should_receive(:puts).with("The file '/path/to/file' was 'removed'")
+          @handler.removed '/path/to/file'
         end
       end
     end

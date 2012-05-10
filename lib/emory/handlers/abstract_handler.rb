@@ -11,7 +11,7 @@ module Emory
         raise_not_implemented_error(self.class, __method__)
       end
 
-      def deleted(file_path = nil)
+      def removed(file_path = nil)
         raise_not_implemented_error(self.class, __method__)
       end
 

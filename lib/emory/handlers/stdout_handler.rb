@@ -13,7 +13,7 @@ module Emory
         report_file_path_action(file_path, __method__)
       end
 
-      def deleted(file_path)
+      def removed(file_path)
         report_file_path_action(file_path, __method__)
       end
 
