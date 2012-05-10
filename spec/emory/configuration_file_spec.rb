@@ -6,12 +6,12 @@ module Emory
     context "#read" do
       before(:each) do
         
-        @start_search_info = "Start to search for configuration file: %s"
-        @search_info = "Searching for configuration file under: %s"
-        @file_found_info = "configuration file found: %s"
-        @file_not_found_info = "configuration file NOT found"
+        @start_search_info = ConfigurationFile::START_SEARCH_INFO
+        @search_info = ConfigurationFile::SEARCH_INFO
+        @file_found_info = ConfigurationFile::FILE_FOUND_INFO
+        @file_not_found_info = ConfigurationFile::FILE_NOT_FOUND_INFO
+        @configuration_file_name = ConfigurationFile::CONFIG_FILE_NAME
         
-        @configuration_file_name = '.emory'
         @current_path = '/root/sources/emory'
         Dir.should_receive(:pwd).and_return(@current_path)
       end
