@@ -47,6 +47,12 @@ Ruby code wrapped in gem's configuration DSL.
 
 TODO: Show example configuration
 
+```ruby
+handler :simple, ::Emory::Handlers::StdoutHandler, actions: [:added, :removed]
+
+teleport ['/path/to/watched/directory', '/path/to/another/watched/directory'], :simple
+```
+
 The gem supplies an executable file which scans for the configuration file in current directory
 (and up the path if not found), configures itself and launches the process. If you need to terminate
 execution then proceed like your operating system allows you to (Ctrl-C, for example).
@@ -87,7 +93,7 @@ Teleport yada-yada-yada
 
 ```ruby
 teleport ['/path/to/watched/directory', '/path/to/another/watched/directory'],
-         :noop,
+         :desired_handler,
          options: {ignore: %r{^ignored/path/}, filter: /\.rb$/}
 ```
 
