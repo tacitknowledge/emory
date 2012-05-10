@@ -48,6 +48,8 @@ Ruby code wrapped in gem's configuration DSL.
 Example configuration:
 
 ```ruby
+require 'emory/handlers/stdout_handler'
+
 handler :simple, ::Emory::Handlers::StdoutHandler, actions: [:added, :removed]
 
 teleport ['/path/to/watched/directory', '/path/to/another/watched/directory'], :simple
@@ -74,12 +76,16 @@ The Emory configuration DSL is evaluated as plain Ruby, so you can use normal Ru
 Handler yada-yada-yada
 
 ```ruby
+require 'emory/handlers/stdout_handler'
+
 handler :noop,
         ::Emory::Handlers::StdoutHandler,
         actions: [:added, :removed]
 ```
 
 ```ruby
+require 'emory/handlers/some_other_handler'
+
 handler :hndlr,
         ::Emory::Handlers::SomeOtherHandler,
         actions: [:all],
