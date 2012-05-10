@@ -45,7 +45,7 @@ Emory is run from the command line. Please open your terminal and go to your pro
 There you would need to create Emory config file `.emory` which in fact is nothing more than regular
 Ruby code wrapped in gem's configuration DSL.
 
-TODO: Show example configuration
+Example configuration:
 
 ```ruby
 handler :simple, ::Emory::Handlers::StdoutHandler, actions: [:added, :removed]
