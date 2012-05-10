@@ -1,28 +1,44 @@
-# Emory
+Emory
+=====
 
 The Emory gem listens to file modifications and runs an action against it (for example, upload to a remote location).
 
-## Installation
+Contents
+--------
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [Emory configuration DSL](#emory-dsl)
+  * [handler](#emory-dsl-handler)
+  * [teleport](#emory-dsl-teleport)
+* [Contributing](#contributing)
+* [Authors](#authors)
+
+<a name="installation" />
+Installation
+------------
 
 Add this line to your application's `Gemfile`:
 
-``` ruby
-    gem 'emory'
+```ruby
+gem 'emory'
 ```
 
 And then execute:
 
-``` bash
-    $ bundle
+```bash
+$ bundle
 ```
 
 Or install it yourself as:
 
-``` bash
-    $ gem install emory
+```bash
+$ gem install emory
 ```
 
-## Usage
+<a name="usage" />
+Usage
+-----
 
 Emory is run from the command line. Please open your terminal and go to your project's work directory.
 
@@ -35,11 +51,49 @@ The gem supplies an executable file which scans for the configuration file in cu
 (and up the path if not found), configures itself and launches the process. If you need to terminate
 execution then proceed like your operating system allows you to (Ctrl-C, for example).
 
-``` bash
-    $ emory
+```bash
+$ emory
 ```
 
-## Contributing
+<a name="emory-dsl" />
+Emory configuration DSL
+-----------------------
+
+The Emory configuration DSL is evaluated as plain Ruby, so you can use normal Ruby code in your
+`.emory` file. Emory itself provides the following DSL methods that can be used for configuration:
+
+<a name="emory-dsl-handler" />
+### handler
+
+Handler yada-yada-yada
+
+```ruby
+handler :noop,
+        ::Emory::Handlers::StdoutHandler,
+        actions: [:added, :removed]
+```
+
+```ruby
+handler :hndlr,
+        ::Emory::Handlers::SomeOtherHandler,
+        actions: [:all],
+        options: {host: 'localhost', port: '8080', path: '/some/remote/root/path'}
+```
+
+<a name="emory-dsl-teleport" />
+### teleport
+
+Teleport yada-yada-yada
+
+```ruby
+teleport ['/path/to/watched/directory', '/path/to/another/watched/directory'],
+         :noop,
+         options: {ignore: %r{^ignored/path/}, filter: /\.rb$/}
+```
+
+<a name="contributing" />
+Contributing
+------------
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -47,7 +101,9 @@ execution then proceed like your operating system allows you to (Ctrl-C, for exa
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-## Authors
+<a name="authors" />
+Authors
+-------
 
 * [Scott Askew](https://github.com/scottfromsf)
 * [Vladislav Gangan](https://github.com/vgangan)
