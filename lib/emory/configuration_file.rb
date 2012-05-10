@@ -9,6 +9,7 @@ module Emory
         if file.nil?
           puts "configuration file NOT found"
         else
+          # TODO: raise error
           puts "configuration file found: #{file}"
         end
       end
@@ -35,7 +36,7 @@ module Emory
       end
       
       def get_file_full_path dir, file
-          File.expand_path(file, dir) if file_exists?(dir, file)
+        File.expand_path(file, dir) if file_exists?(dir, file)
       end
     end
   end
