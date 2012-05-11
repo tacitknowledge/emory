@@ -9,7 +9,7 @@ module Emory
         @start_search_info = ConfigurationFile::START_SEARCH_INFO
         @search_info = ConfigurationFile::SEARCH_INFO
         @file_found_info = ConfigurationFile::FILE_FOUND_INFO
-        @file_not_found_info = ConfigurationFile::FILE_NOT_FOUND_INFO
+        @file_not_found_error = ConfigurationFile::FILE_NOT_FOUND_ERROR
         @configuration_file_name = ConfigurationFile::CONFIG_FILE_NAME
         
         @current_path = '/root/sources/emory'
@@ -28,7 +28,7 @@ module Emory
         
         expect {
           ConfigurationFile.locate
-        }.to raise_error(@file_not_found_info)
+        }.to raise_error(@file_not_found_error)
       end
       
       it 'should find configuration file in current directory' do

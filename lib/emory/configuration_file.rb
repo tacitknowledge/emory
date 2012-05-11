@@ -6,14 +6,14 @@ module Emory
     START_SEARCH_INFO = "Start to search for configuration file: %s"
     SEARCH_INFO = "Searching for configuration file under: %s"
     FILE_FOUND_INFO = "configuration file found: %s"
-    FILE_NOT_FOUND_INFO = "configuration file NOT found"
+    FILE_NOT_FOUND_ERROR = "configuration file NOT found"
 
     class << self
       def locate
         puts START_SEARCH_INFO % CONFIG_FILE_NAME
         file_full_path = locate_file Dir.pwd, CONFIG_FILE_NAME
         if file_full_path.nil?
-          raise FILE_NOT_FOUND_INFO
+          raise FILE_NOT_FOUND_ERROR
         else
           puts FILE_FOUND_INFO % file_full_path
           file_full_path
