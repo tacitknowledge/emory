@@ -105,6 +105,26 @@ module Emory
         }.should raise_error(UndefinedTeleportHandlerException,
                              /The handler ':something' wired to teleport could not be found/)
       end
+
+      it "configures the teleport config with mandatory data" do
+        handler = Object.new
+        @dsl.handlers[:something] = handler
+        @dsl.teleport('/path/to/dir', :something)
+        @dsl.teleports.size.should == 1
+        @dsl.teleports[0].watched_path.should == '/path/to/dir'
+        @dsl.teleports[0].filter.should be_nil
+        @dsl.teleports[0].ignore.should be_nil
+      end
+
+      it "configures the teleport config with optional data" do
+        handler = Object.new
+        @dsl.handlers[:something] = handler
+        @dsl.teleport('/path/to/dir', :something, ignore: %r{ignored/}, filter: /\.txt$/)
+        @dsl.teleports.size.should == 1
+        @dsl.teleports[0].watched_path.should == '/path/to/dir'
+        @dsl.teleports[0].filter.should == /\.txt$/
+        @dsl.teleports[0].ignore.should == %r{ignored/}
+      end
     end
   end
 

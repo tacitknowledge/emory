@@ -1,3 +1,5 @@
+require 'emory/teleport_config'
+
 module Emory
 
   class EmoryMisconfigurationException < Exception; end
@@ -45,10 +47,22 @@ module Emory
 
     def teleport(watched_dir, handler_name, options = {})
       raise UndefinedTeleportHandlerException, "The handler ':#{handler_name}' wired to teleport could not be found" unless handlers.include?(handler_name)
+
+      config = TeleportConfig.new
+      config.watched_path = watched_dir
+      config.handler = handlers[handler_name]
+      config.filter = options[:filter] if options.include?(:filter)
+      config.ignore = options[:ignore] if options.include?(:ignore)
+
+      teleports << config
     end
 
     def handlers
       @handlers ||= {}
+    end
+
+    def teleports
+      @teleports ||= []
     end
   end
 
