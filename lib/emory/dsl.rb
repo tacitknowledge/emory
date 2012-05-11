@@ -3,6 +3,7 @@ module Emory
   class EmoryMisconfigurationException < Exception; end
   class DuplicateHandlerNameException < Exception; end
   class HandlerActionAllMustBeSingletonException < Exception; end
+  class HandlerActionMustBeSuppliedException < Exception; end
   class UndefinedTeleportHandlerException < Exception; end
 
   class Dsl
@@ -19,6 +20,7 @@ module Emory
 
     def handler(handler_name, class_name, options, *actions)
       raise DuplicateHandlerNameException, "The handler name ':#{handler_name}' is defined more than once" if handlers.include?(handler_name)
+      raise HandlerActionMustBeSuppliedException, "At least one handler action needs to be supplied to ':#{handler_name}'" if actions.empty?
 
       handler = class_name.new(options)
       uniq_actions = actions.uniq

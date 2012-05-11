@@ -58,6 +58,13 @@ module Emory
                              /The handler action ':all' cannot be mixed with other types/)
       end
 
+      it "mandates at least one action type to be supplied" do
+        proc {
+          @dsl.handler(:something, Emory::Handlers::AbstractHandler, {})
+        }.should raise_error(HandlerActionMustBeSuppliedException,
+                             /At least one handler action needs to be supplied to ':something'/)
+      end
+
       it "with action of type ':all' does not undefine any handler's methods" do
         @dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :all)
         @dsl.handlers[:something].respond_to?(:added).should == true
