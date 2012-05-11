@@ -65,6 +65,13 @@ module Emory
                              /At least one handler action needs to be supplied to ':something'/)
       end
 
+      it "mandates correct handler action types are allowed to be supplied" do
+        proc {
+          @dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :foo)
+        }.should raise_error(HandlerActionUnsupportedException,
+                             /The action ':foo' supplied to handler ':something' is unsupported./)
+      end
+
       it "with action of type ':all' does not undefine any handler's methods" do
         @dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :all)
         @dsl.handlers[:something].respond_to?(:added).should == true
