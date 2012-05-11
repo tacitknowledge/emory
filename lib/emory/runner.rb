@@ -1,15 +1,14 @@
 require 'emory/configuration_file'
+require 'emory/dsl'
 
 module Emory
 
   class Runner
     class << self
       def start
-        emory_config_file_location = ConfigurationFile.locate
-        
-        #TODO: listening for folders from configuration file
-        #      and trigger corresponding handler
-        
+        emory_config_file = ConfigurationFile.locate
+        emory_config_contents = File.read(emory_config_file)
+        Emory::Dsl.instance_eval_emoryfile(emory_config_contents, emory_config_file)
       end
     end
   end
