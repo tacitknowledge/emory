@@ -5,6 +5,9 @@ module Emory
 
     class StdoutHandler < AbstractHandler
 
+      def initialize(options = {})
+      end
+
       def added(file_path)
         report_file_path_action(file_path, __method__)
       end

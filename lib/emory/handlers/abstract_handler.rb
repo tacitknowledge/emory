@@ -3,6 +3,9 @@ module Emory
 
     class AbstractHandler
 
+      def initialize(options = {})
+      end
+
       def added(file_path = nil)
         raise_not_implemented_error(self.class, __method__)
       end
