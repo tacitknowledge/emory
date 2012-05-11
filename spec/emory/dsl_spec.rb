@@ -93,6 +93,19 @@ module Emory
         @dsl.handlers[:something].respond_to?(:removed).should == false
       end
     end
+
+    context "'teleport' method" do
+      before(:each) do
+        @dsl = Dsl.new
+      end
+
+      it "mandates referenced handlers must exist at the configuration time" do
+        proc {
+          @dsl.teleport(nil, :something)
+        }.should raise_error(UndefinedTeleportHandlerException,
+                             /The handler ':something' wired to teleport could not be found/)
+      end
+    end
   end
 
 end

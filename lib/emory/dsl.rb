@@ -43,6 +43,10 @@ module Emory
       handlers[handler_name] = handler
     end
 
+    def teleport(watched_dir, handler_name, options = {})
+      raise UndefinedTeleportHandlerException, "The handler ':#{handler_name}' wired to teleport could not be found" unless handlers.include?(handler_name)
+    end
+
     def handlers
       @handlers ||= {}
     end
