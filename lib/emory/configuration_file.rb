@@ -7,6 +7,8 @@ module Emory
     SEARCH_INFO = "Searching for configuration file under: %s"
     FILE_FOUND_INFO = "configuration file found: %s"
     FILE_NOT_FOUND_ERROR = "configuration file NOT found"
+    ROOT_DIRECTORY = "/"
+    PARENT_DIRECTORY = ".."
 
     class << self
       def locate
@@ -27,13 +29,13 @@ module Emory
         while file_full_path.nil?
           dir = get_parent_directory dir
           file_full_path = get_file_full_path dir, file_name
-          break if dir == '/'
+          break if dir == ROOT_DIRECTORY
         end
         file_full_path
       end
       
       def get_parent_directory dir
-        File.expand_path("..", dir)
+        File.expand_path(PARENT_DIRECTORY, dir)
       end
       
       def get_file_full_path dir, file
