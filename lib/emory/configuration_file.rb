@@ -1,5 +1,7 @@
-module Emory
+require 'emory/emory_logger'
 
+module Emory
+    
   class ConfigurationFile
 
     CONFIG_FILE_NAME = ".emory"
@@ -9,15 +11,18 @@ module Emory
     FILE_NOT_FOUND_ERROR = "configuration file NOT found"
     ROOT_DIRECTORY = "/"
     PARENT_DIRECTORY = ".."
-
+    
     class << self
       def locate
-        puts START_SEARCH_INFO % CONFIG_FILE_NAME
+    
+        @logger = Emory::Logger.for_class('ConfigurationFile')
+        
+        @logger.info START_SEARCH_INFO % CONFIG_FILE_NAME
         file_full_path = locate_file Dir.pwd, CONFIG_FILE_NAME
         if file_full_path.nil?
           raise FILE_NOT_FOUND_ERROR
         else
-          puts FILE_FOUND_INFO % file_full_path
+          @logger.info FILE_FOUND_INFO % file_full_path
           file_full_path
         end
       end
@@ -39,7 +44,7 @@ module Emory
       end
       
       def get_file_full_path dir, file
-        puts SEARCH_INFO % dir
+        @logger.info SEARCH_INFO % dir
         file_full_path = File.expand_path(file, dir)
         if File.exists?(file_full_path)
           file_full_path 

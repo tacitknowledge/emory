@@ -15,15 +15,17 @@ module Emory
         @slash = '/'
         @current_path = '/root/sources/emory'
         Dir.should_receive(:pwd).and_return(@current_path)
+        @logger = double('logger')
+        Logger.should_receive(:for_class).and_return(@logger)
       end
       
       it 'should raise error if no configuration file found' do
         File.should_receive(:exists?).exactly(4).times.and_return(false)
-        ConfigurationFile.should_receive(:puts).with(@start_search_info % @configuration_file_name)
+        @logger.should_receive(:info).with(@start_search_info % @configuration_file_name)
         
         @current_path.split(@slash).each do |word|
           @path = @slash if word.empty?
-          ConfigurationFile.should_receive(:puts).with(@search_info % @path += word)
+          @logger.should_receive(:info).with(@search_info % @path += word)
           @path += @slash unless word.empty?
         end
         
@@ -36,9 +38,9 @@ module Emory
         file_full_path = @current_path + @slash + @configuration_file_name
         File.should_receive(:exists?).and_return(true)
         
-        ConfigurationFile.should_receive(:puts).with(@start_search_info % @configuration_file_name)
-        ConfigurationFile.should_receive(:puts).with(@search_info % @current_path)
-        ConfigurationFile.should_receive(:puts).with(@file_found_info % file_full_path)
+        @logger.should_receive(:info).with(@start_search_info % @configuration_file_name)
+        @logger.should_receive(:info).with(@search_info % @current_path)
+        @logger.should_receive(:info).with(@file_found_info % file_full_path)
         
         ConfigurationFile.locate.should == file_full_path
       end
@@ -48,10 +50,10 @@ module Emory
         file_full_path = File.expand_path(@configuration_file_name, parent_directory)
         File.should_receive(:exists?).twice.and_return(false, true)
         
-        ConfigurationFile.should_receive(:puts).with(@start_search_info % @configuration_file_name)
-        ConfigurationFile.should_receive(:puts).with(@search_info % @current_path)
-        ConfigurationFile.should_receive(:puts).with(@search_info % parent_directory)
-        ConfigurationFile.should_receive(:puts).with(@file_found_info % file_full_path)
+        @logger.should_receive(:info).with(@start_search_info % @configuration_file_name)
+        @logger.should_receive(:info).with(@search_info % @current_path)
+        @logger.should_receive(:info).with(@search_info % parent_directory)
+        @logger.should_receive(:info).with(@file_found_info % file_full_path)
         
         ConfigurationFile.locate.should == file_full_path
       end
@@ -60,13 +62,13 @@ module Emory
         file_full_path = @slash + @configuration_file_name
         File.should_receive(:exists?).exactly(4).times.and_return(false, false, false, true)
         
-        ConfigurationFile.should_receive(:puts).with(@start_search_info % @configuration_file_name)
+        @logger.should_receive(:info).with(@start_search_info % @configuration_file_name)
         @current_path.split(@slash).each do |word|
           @path = @slash if word.empty?
-          ConfigurationFile.should_receive(:puts).with(@search_info % @path += word)
+          @logger.should_receive(:info).with(@search_info % @path += word)
           @path += @slash unless word.empty?
         end
-        ConfigurationFile.should_receive(:puts).with(@file_found_info % file_full_path)
+        @logger.should_receive(:info).with(@file_found_info % file_full_path)
         
         ConfigurationFile.locate.should == file_full_path
       end
