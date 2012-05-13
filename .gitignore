@@ -17,6 +17,7 @@ test/version_tmp
 tmp
 .idea/
 .project
+emory.log
 
 ## MAC OS
 .DS_Store
