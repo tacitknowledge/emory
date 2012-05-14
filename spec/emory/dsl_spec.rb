@@ -22,7 +22,7 @@ module Emory
           blah_blah_blah
         EOM
 
-        Dsl.stub!(:puts)
+        Dsl.stub(:puts)
         Dsl.should_receive(:puts).with(/Incorrect contents of .emory file, original error is:\n/)
 
         proc {

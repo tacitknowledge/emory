@@ -11,19 +11,19 @@ module Emory
         end
 
         it "'added' just calls 'puts' with right params" do
-          @handler.stub!(:puts)
+          @handler.stub(:puts)
           @handler.should_receive(:puts).with("The file '/path/to/file' was 'added'")
           @handler.added '/path/to/file'
         end
 
         it "'modified' just calls 'puts' with right params" do
-          @handler.stub!(:puts)
+          @handler.stub(:puts)
           @handler.should_receive(:puts).with("The file '/path/to/file' was 'modified'")
           @handler.modified '/path/to/file'
         end
 
         it "'removed' just calls 'puts' with right params" do
-          @handler.stub!(:puts)
+          @handler.stub(:puts)
           @handler.should_receive(:puts).with("The file '/path/to/file' was 'removed'")
           @handler.removed '/path/to/file'
         end
