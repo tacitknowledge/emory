@@ -11,12 +11,18 @@ module Emory
     
     Logging.logger.root.add_appenders(:stdout, LOG_FILE)
     
+    attr_reader :log
+    
+    def initialize(object)
+      @log = Logging.logger[object.name]
+    end
+    
     class << self
-  
-      def for_class name
-        Logging.logger[name]
+      
+      def log_for object
+        new(object).log
       end
-  
+      
     end
   end
 end

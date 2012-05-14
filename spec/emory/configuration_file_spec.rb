@@ -16,7 +16,7 @@ module Emory
         @current_path = '/root/sources/emory'
         Dir.should_receive(:pwd).and_return(@current_path)
         @logger = double('logger')
-        Logger.should_receive(:for_class).and_return(@logger)
+        Emory::Logger.should_receive(:log_for).and_return(@logger)
       end
       
       it 'should raise error if no configuration file found' do

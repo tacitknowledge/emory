@@ -15,8 +15,8 @@ module Emory
     class << self
       def locate
     
-        @logger = Emory::Logger.for_class(ConfigurationFile.name)
-        
+        @logger = Emory::Logger.log_for(ConfigurationFile)
+
         @logger.info START_SEARCH_INFO % CONFIG_FILE_NAME
         file_full_path = locate_file Dir.pwd, CONFIG_FILE_NAME
         if file_full_path.nil?
