@@ -11,6 +11,14 @@ module Emory
         emory_config_contents = File.read(emory_config_file)
         config = Emory::Dsl.instance_eval_emoryfile(emory_config_contents, emory_config_file)
 
+        configure_listeners(config)
+
+        Thread.current.join
+      end
+
+      private
+
+      def configure_listeners(config)
         config.teleports.each do |teleport|
           listener = Listen.to(teleport.watched_path)
           listener.ignore(teleport.ignore) unless teleport.ignore.nil?
@@ -18,11 +26,7 @@ module Emory
           listener.change(&get_handler_callback(teleport.handler))
           listener.start(false)
         end
-
-        Thread.current.join
       end
-
-      private
 
       def get_handler_callback(handler)
         Proc.new do |modified, added, removed|
