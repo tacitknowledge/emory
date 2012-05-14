@@ -17,7 +17,7 @@ module Emory
         config.handlers.freeze
         config.teleports.freeze
         config
-      rescue Exception => e
+      rescue
         puts "Incorrect contents of .emory file, original error is:\n#{ $! }"
         raise EmoryMisconfigurationException, 'Incorrect contents of .emory file'
       end
