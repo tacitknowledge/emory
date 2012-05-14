@@ -15,7 +15,7 @@ module Emory
         EOM
 
         config = Dsl.instance_eval_emoryfile(contents, '/path/to/file')
-        config.handlers.size.should == 1
+        config.should have(1).handlers
         config.handlers[:something].class.should == Emory::Handlers::AbstractHandler
       end
 
@@ -104,7 +104,7 @@ module Emory
         handler = Object.new
         dsl.handlers[:something] = handler
         dsl.teleport('/path/to/dir', :something)
-        dsl.teleports.size.should == 1
+        dsl.should have(1).teleports
         dsl.teleports[0].watched_path.should == '/path/to/dir'
         dsl.teleports[0].filter.should be_nil
         dsl.teleports[0].ignore.should be_nil
@@ -114,7 +114,7 @@ module Emory
         handler = Object.new
         dsl.handlers[:something] = handler
         dsl.teleport('/path/to/dir', :something, ignore: %r{ignored/}, filter: /\.txt$/)
-        dsl.teleports.size.should == 1
+        dsl.should have(1).teleports
         dsl.teleports[0].watched_path.should == '/path/to/dir'
         dsl.teleports[0].filter.should == /\.txt$/
         dsl.teleports[0].ignore.should == %r{ignored/}
