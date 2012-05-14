@@ -6,14 +6,15 @@ module Emory
   
   class Logger
     
-    Logging.logger.root.level = :info
-    Logging.logger.root.add_appenders(
-      Logging.appenders.file(LOG_FILE), Logging.appenders.stdout)
+    Logging.appenders.stdout(:level => :info)
+    Logging.appenders.rolling_file(LOG_FILE, :level => :debug)
+    
+    Logging.logger.root.add_appenders(:stdout, LOG_FILE)
     
     class << self
   
       def for_class name
-        logger = Logging.logger[name]
+        Logging.logger[name]
       end
   
     end
