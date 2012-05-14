@@ -6,27 +6,25 @@ module Emory
 
     describe AbstractHandler do
       context "is abstract so its method" do
-        before(:each) do
-          @handler = AbstractHandler.new
-        end
+        let(:handler) { AbstractHandler.new }
 
         it "'added' raises NotImplementedError" do
           proc {
-            @handler.added
+            handler.added
           }.should raise_error(NotImplementedError,
                                /This method is not implemented: Emory::Handlers::AbstractHandler#added/)
         end
 
         it "'modified' raises NotImplementedError" do
           proc {
-            @handler.modified
+            handler.modified
           }.should raise_error(NotImplementedError,
                                /This method is not implemented: Emory::Handlers::AbstractHandler#modified/)
         end
 
         it "'removed' raises NotImplementedError" do
           proc {
-            @handler.removed
+            handler.removed
           }.should raise_error(NotImplementedError,
                                /This method is not implemented: Emory::Handlers::AbstractHandler#removed/)
         end
