@@ -14,6 +14,8 @@ module Emory
       def instance_eval_emoryfile(contents, config_path)
         config = new
         config.instance_eval(contents, config_path, 1)
+        config.handlers.freeze
+        config.teleports.freeze
         config
       rescue Exception => e
         puts "Incorrect contents of .emory file, original error is:\n#{ $! }"

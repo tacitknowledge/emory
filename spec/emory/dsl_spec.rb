@@ -8,15 +8,20 @@ module Emory
     let(:dsl) { Dsl.new }
 
     context "class object" do
-      it "parses the supplied handler config and configures correct object type" do
+      it "parses the supplied handler config and configures correct object types in frozen collections" do
         contents = <<-EOM
           require 'emory/handlers/abstract_handler'
           handler :something, Emory::Handlers::AbstractHandler, {}, :all
+          teleport '/path/to/dir', :something, ignore: %r{ignored/}, filter: /\.txt$/
         EOM
 
         config = Dsl.instance_eval_emoryfile(contents, '/path/to/file')
         config.should have(1).handlers
+        config.handlers.should be_frozen
         config.handlers[:something].class.should == Emory::Handlers::AbstractHandler
+        config.should have(1).teleports
+        config.teleports.should be_frozen
+        config.teleports[0].class.should == Emory::TeleportConfig
       end
 
       it "detects and reports incorrect usage of DSL" do
