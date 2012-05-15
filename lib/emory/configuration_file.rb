@@ -1,4 +1,4 @@
-require 'emory/emory_logger'
+require 'logging'
 require 'pathname'
 
 module Emory
@@ -9,22 +9,18 @@ module Emory
 
     class << self
 
+      LOGGER = Logging.logger[self]
+
       def locate
         Pathname.new(Dir.pwd).ascend do |dir|
-          logger.debug "Examining directory: #{dir}"
+          LOGGER.debug "Examining directory: #{dir}"
           config_file = File.join(dir, ".emory")
           next unless File.exists?(config_file)
-          logger.info "Found config file: #{config_file}"
+          LOGGER.info "Found config file: #{config_file}"
           return config_file
         end
 
         raise EmoryConfigurationFileNotFoundException, 'Configuration file (.emory) was not found'
-      end
-
-      private
-
-      def logger
-        @logger ||= Emory::Logger.for(self)
       end
 
     end
