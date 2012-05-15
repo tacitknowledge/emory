@@ -14,7 +14,7 @@ module Emory
     attr_reader :log
     
     def initialize(object)
-      @log = Logging.logger[object.name]
+      @log = Logging.logger[object]
     end
     
     class << self
