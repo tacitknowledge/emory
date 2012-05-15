@@ -24,7 +24,7 @@ module Emory
       private
 
       def logger
-        @logger ||= Emory::Logger.log_for(self)
+        @logger ||= Emory::Logger.for(self)
       end
 
     end

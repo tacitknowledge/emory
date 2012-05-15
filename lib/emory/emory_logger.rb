@@ -19,7 +19,7 @@ module Emory
     
     class << self
       
-      def log_for object
+      def for object
         new(object).log
       end
       
