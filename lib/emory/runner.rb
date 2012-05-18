@@ -24,6 +24,8 @@ module Emory
           configure_listeners(config)
 
           Thread.current.join
+        rescue Interrupt
+          LOGGER.info('Shutting down Emory')
         rescue Exception => e
           LOGGER.error(e)
         end
