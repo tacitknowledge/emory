@@ -3,9 +3,7 @@
 require 'logging'
 require 'emory/runner'
 
-LOG_FILE = 'emory.log'
-Logging.appenders.stdout(level: :info)
-Logging.appenders.rolling_file(LOG_FILE, level: :debug)
-Logging.logger.root.add_appenders(:stdout, LOG_FILE)
+Logging.logger.root.add_appenders(Logging.appenders.stdout(level: :info),
+                                  Logging.appenders.rolling_file('emory.log', level: :debug))
 
 Emory::Runner.start
