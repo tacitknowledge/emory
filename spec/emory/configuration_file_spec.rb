@@ -5,7 +5,7 @@ module Emory
   
   describe ConfigurationFile do
 
-    context "'locate' method" do
+    context "class object" do
 
       it "finds config file on its path" do
         Dir.should_receive(:pwd).and_return('/qwe/asd/zxc/')
