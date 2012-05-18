@@ -12,13 +12,16 @@ module Emory
   class Dsl
     class << self
       def instance_eval_emoryfile(contents, config_path)
+        @log = Emory::Logger.log_for(self)
+        @log.debug "Evaluates configuration file"
         config = new
         config.instance_eval(contents, config_path, 1)
         config.handlers.freeze
         config.teleports.freeze
+        @log.debug "returns initiated Dsl object"
         config
       rescue
-        puts "Incorrect contents of .emory file, original error is:\n#{ $! }"
+        @log.debug "Incorrect contents of .emory file, original error is:\n#{ $! }"
         raise EmoryMisconfigurationException, 'Incorrect contents of .emory file'
       end
     end
@@ -66,6 +69,7 @@ module Emory
     def teleports
       @teleports ||= []
     end
+    
   end
 
 end
