@@ -7,10 +7,9 @@ module Emory
 
   class ConfigurationFile
 
+    LOGGER = Logging.logger[self]
+
     class << self
-
-      LOGGER = Logging.logger[self]
-
       def locate
         Pathname.new(Dir.pwd).ascend do |dir|
           LOGGER.debug "Examining directory: #{dir}"
@@ -22,7 +21,6 @@ module Emory
 
         raise EmoryConfigurationFileNotFoundException, 'Configuration file (.emory) was not found'
       end
-
     end
 
   end
