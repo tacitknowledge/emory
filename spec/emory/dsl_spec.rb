@@ -28,12 +28,6 @@ module Emory
         contents = <<-EOM
           blah_blah_blah
         EOM
-        
-        @logger = double('logger')
-        Emory::Logger.should_receive(:log_for).and_return(@logger)
-        @logger.should_receive(:debug).with("Evaluates configuration file")
-        @logger.should_not_receive(:debug).with("returns initiated Dsl object")
-        @logger.should_receive(:debug).with(/Incorrect contents of .emory file, original error is:\n/)
 
         proc {
           Dsl.instance_eval_emoryfile(contents, '/path/to/file')
