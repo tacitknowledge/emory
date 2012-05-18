@@ -10,23 +10,22 @@ module Emory
   class UndefinedTeleportHandlerException < Exception; end
 
   class Dsl
+
+    LOGGER = Logging.logger[self]
+    ALLOWED_HANDLER_ACTIONS = [:all, :added, :modified, :removed]
+
     class << self
       def instance_eval_emoryfile(contents, config_path)
-        @log = Emory::Logger.log_for(self)
-        @log.debug "Evaluates configuration file"
         config = new
         config.instance_eval(contents, config_path, 1)
         config.handlers.freeze
         config.teleports.freeze
-        @log.debug "returns initiated Dsl object"
         config
       rescue
-        @log.debug "Incorrect contents of .emory file, original error is:\n#{ $! }"
+        LOGGER.error("Incorrect contents of .emory file, original error is:\n#{ $! }")
         raise EmoryMisconfigurationException, 'Incorrect contents of .emory file'
       end
     end
-
-    ALLOWED_HANDLER_ACTIONS = [ :all, :added, :modified, :removed ]
 
     def handler(handler_name, class_name, options, *actions)
       uniq_actions = actions.uniq
