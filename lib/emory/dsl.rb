@@ -42,6 +42,7 @@ module Emory
       handler = handler_builder.build
       raise DuplicateHandlerNameException, "The handler name ':#{handler.name}' is defined more than once" if handlers.include?(handler.name)
       handlers[handler.name] = handler
+      LOGGER.debug("Processed and added ':#{handler.name}' to the list: #{handlers}")
     end
 
     def handlers
