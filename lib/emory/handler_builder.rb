@@ -14,10 +14,10 @@ module Emory
     ALLOWED_HANDLER_ACTIONS = [HANDLER_ACTION_ALL, :added, :modified, :removed]
 
     def initialize(&block)
-      raise HandlerConfigurationBlockMustBeSuppliedException, "The configuration block with handler settings bust be supplied" unless block_given?
+      LOGGER.debug('Initializing a new handler builder')
+      raise HandlerConfigurationBlockMustBeSuppliedException, "The configuration block with handler settings must be supplied" unless block_given?
       @block = block
       @options = {}
-      LOGGER.debug('Initializing a new handler builder')
     end
 
     def build
