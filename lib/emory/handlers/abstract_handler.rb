@@ -3,7 +3,10 @@ module Emory
 
     class AbstractHandler
 
-      def initialize(options = {})
+      attr_reader :name
+
+      def initialize(name, options = {})
+        self.name = name
       end
 
       def added(file_path = nil)
@@ -19,6 +22,8 @@ module Emory
       end
 
       private
+
+      attr_writer :name
 
       def raise_not_implemented_error(class_name, method_name)
         raise NotImplementedError, "This method is not implemented: #{class_name}##{method_name}"

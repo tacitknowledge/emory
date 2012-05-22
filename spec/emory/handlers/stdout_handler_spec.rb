@@ -6,7 +6,7 @@ module Emory
 
     describe StdoutHandler do
       context "works with standard output" do
-        let(:handler) { StdoutHandler.new }
+        let(:handler) { StdoutHandler.new(:test_handler) }
 
         it "'added' just calls 'puts' with right params" do
           handler.stub(:puts)

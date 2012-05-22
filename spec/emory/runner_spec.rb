@@ -13,7 +13,7 @@ module Emory
         dsl = Dsl.new
         teleport = TeleportConfig.new
         teleport.watched_path = 'watched_path'
-        teleport.handler = Handlers::StdoutHandler.new
+        teleport.handler = Handlers::StdoutHandler.new(:handler_name)
         teleport.ignore = 'ignore_path'
         teleport.filter = 'filter_expression'
         dsl.teleports << teleport

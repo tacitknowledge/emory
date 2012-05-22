@@ -6,7 +6,7 @@ module Emory
 
     describe AbstractHandler do
       context "is abstract so its method" do
-        let(:handler) { AbstractHandler.new }
+        let(:handler) { AbstractHandler.new(:test_handler) }
 
         it "'added' raises NotImplementedError" do
           proc {
