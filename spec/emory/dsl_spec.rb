@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'emory/dsl'
+require 'emory/handler_builder'
 require 'emory/handlers/abstract_handler'
 
 module Emory
@@ -11,7 +12,13 @@ module Emory
       it "parses the supplied handler config and configures correct object types in frozen collections" do
         contents = <<-EOM
           require 'emory/handlers/abstract_handler'
-          handler :something, Emory::Handlers::AbstractHandler, {}, :all
+
+          handler do
+            name :something
+            implementation Emory::Handlers::AbstractHandler
+            events :all
+          end
+
           teleport '/path/to/dir', :something, ignore: %r{ignored/}, filter: /\.txt$/
         EOM
 
@@ -37,60 +44,17 @@ module Emory
     end
 
     context "'handler' method" do
-      it "passes the supplied options on to the handler's contructor" do
-        options = {host: 'localhost', port: '8080'}
-        Emory::Handlers::AbstractHandler.should_receive(:new).with(options)
-        dsl.handler(:something, Emory::Handlers::AbstractHandler, options, :all)
-      end
-
       it "does not allow to add multiple handlers with the same name" do
         dsl.handlers[:something] = Object.new
+        builder = double('handler_builder')
+        handler = double('handler')
+        HandlerBuilder.should_receive(:new).and_return(builder)
+        builder.should_receive(:build).and_return(handler)
+        handler.should_receive(:name).twice.and_return(:something)
+
         proc {
-          dsl.handler(:something, nil, nil)
-        }.should raise_error(DuplicateHandlerNameException,
-                             /The handler name ':something' is defined more than once/)
-      end
-
-      it "mandates action of type ':all' to be exclusive of other types" do
-        proc {
-          dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :added, :all)
-        }.should raise_error(HandlerActionAllMustBeSingletonException,
-                             /The handler action ':all' cannot be mixed with other types/)
-      end
-
-      it "mandates at least one action type to be supplied" do
-        proc {
-          dsl.handler(:something, Emory::Handlers::AbstractHandler, {})
-        }.should raise_error(HandlerActionMustBeSuppliedException,
-                             /At least one handler action needs to be supplied to ':something'/)
-      end
-
-      it "mandates correct handler action types are allowed to be supplied" do
-        proc {
-          dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :foo)
-        }.should raise_error(HandlerActionUnsupportedException,
-                             /The action ':foo' supplied to handler ':something' is unsupported./)
-      end
-
-      it "with action of type ':all' does not undefine any handler's methods" do
-        dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :all)
-        dsl.handlers[:something].respond_to?(:added).should == true
-        dsl.handlers[:something].respond_to?(:modified).should == true
-        dsl.handlers[:something].respond_to?(:removed).should == true
-      end
-
-      it "with all action types does not undefine any handler's methods" do
-        dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :added, :modified, :removed)
-        dsl.handlers[:something].respond_to?(:added).should == true
-        dsl.handlers[:something].respond_to?(:modified).should == true
-        dsl.handlers[:something].respond_to?(:removed).should == true
-      end
-
-      it "undefines handler's methods which are not supplied" do
-        dsl.handler(:something, Emory::Handlers::AbstractHandler, {}, :added)
-        dsl.handlers[:something].respond_to?(:added).should == true
-        dsl.handlers[:something].respond_to?(:modified).should == false
-        dsl.handlers[:something].respond_to?(:removed).should == false
+          dsl.handler {}
+        }.should raise_error(DuplicateHandlerNameException)
       end
     end
 
