@@ -10,7 +10,6 @@ module Emory
   class Dsl
 
     LOGGER = Logging.logger[self]
-    ALLOWED_HANDLER_ACTIONS = [:all, :added, :modified, :removed]
 
     class << self
       def instance_eval_emoryfile(contents, config_path)
