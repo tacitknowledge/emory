@@ -29,16 +29,16 @@ module Emory
         raise HandlerImplementationMustBeSuppliedException, "The handler implementation must be supplied in its configuration" if @implementation.nil?
 
         LOGGER.debug('Creating a new handler instance')
-        beam = @implementation.new(@name, @options)
+        handler = @implementation.new(@name, @options)
 
         raise HandlerActionMustBeSuppliedException, "At least one handler action needs to be supplied" if @events.nil?
         if @events.first != HANDLER_ACTION_ALL
-          beam.instance_eval { undef :added } unless @events.include?(:added)
-          beam.instance_eval { undef :modified } unless @events.include?(:modified)
-          beam.instance_eval { undef :removed } unless @events.include?(:removed)
+          handler.instance_eval { undef :added } unless @events.include?(:added)
+          handler.instance_eval { undef :modified } unless @events.include?(:modified)
+          handler.instance_eval { undef :removed } unless @events.include?(:removed)
         end
 
-        beam
+        handler
       end
 
       private
