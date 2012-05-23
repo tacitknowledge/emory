@@ -24,7 +24,7 @@ module Emory
       private
 
       def report_file_path_action(file_path, action)
-        puts "The file '#{file_path}' was '#{action}'"
+        puts ":#{name} ~> The file '#{file_path}' was '#{action}'"
       end
 
     end
