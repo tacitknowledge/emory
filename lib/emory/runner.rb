@@ -1,4 +1,3 @@
-require 'logging'
 require 'listen'
 require 'emory/configuration_file'
 require 'emory/dsl'

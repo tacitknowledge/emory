@@ -2,7 +2,7 @@ require 'simplecov'
 SimpleCov.start
 
 require 'rspec'
-require 'emory/configuration_file'
+require 'logging'
 
 RSpec.configure do |config|
   config.color_enabled = true
