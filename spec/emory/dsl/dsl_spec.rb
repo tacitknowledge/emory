@@ -1,6 +1,6 @@
 require 'spec_helper'
-require 'emory/dsl'
-require 'emory/handler_builder'
+require 'emory/dsl/dsl'
+require 'emory/dsl/handler_builder'
 require 'emory/handlers/abstract_handler'
 
 module Emory
