@@ -1,3 +1,4 @@
+require 'logging'
 require 'emory/teleport_config'
 require 'emory/handler_builder'
 

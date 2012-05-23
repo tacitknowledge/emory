@@ -1,3 +1,5 @@
+require 'logging'
+
 module Emory
 
   class HandlerConfigurationBlockMustBeSuppliedException < Exception; end
