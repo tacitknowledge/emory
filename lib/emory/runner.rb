@@ -1,6 +1,6 @@
 require 'listen'
 require 'emory/configuration_file'
-require 'emory/dsl'
+require 'emory/dsl/dsl'
 
 module Emory
 
@@ -18,7 +18,7 @@ module Emory
           emory_config_contents = File.read(emory_config_file)
 
           LOGGER.debug("Evaluating configuration file contents:\n====\n#{emory_config_contents}===")
-          config = Emory::Dsl.instance_eval_emoryfile(emory_config_contents, emory_config_file)
+          config = DSL::Dsl.instance_eval_emoryfile(emory_config_contents, emory_config_file)
 
           LOGGER.debug('Configuring listeners')
           configure_listeners(config)
