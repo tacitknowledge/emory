@@ -1,12 +1,12 @@
 require 'emory/teleport_config'
 require 'emory/dsl/handler_builder'
+require 'emory/dsl/teleport_config_builder'
 
 module Emory
   module DSL
 
     class EmoryMisconfigurationException < Exception; end
     class DuplicateHandlerNameException < Exception; end
-    class UndefinedTeleportHandlerException < Exception; end
 
     class Dsl
 
@@ -25,16 +25,11 @@ module Emory
         end
       end
 
-      def teleport(watched_dir, handler_name, options = {})
-        raise UndefinedTeleportHandlerException, "The handler ':#{handler_name}' wired to teleport could not be found" unless handlers.include?(handler_name)
-
-        config = TeleportConfig.new
-        config.watched_path = watched_dir
-        config.handler = handlers[handler_name]
-        config.filter = options[:filter] if options.include?(:filter)
-        config.ignore = options[:ignore] if options.include?(:ignore)
-
-        teleports << config
+      def teleport(&block)
+        teleport_builder = TeleportConfigBuilder.new(handlers, &block)
+        teleport = teleport_builder.build
+        teleports << teleport
+        LOGGER.debug("Processed and added #{teleport} to the list: #{teleports}")
       end
 
       def handler(&block)

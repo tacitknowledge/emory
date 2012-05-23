@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'emory/dsl/dsl'
 require 'emory/dsl/handler_builder'
+require 'emory/dsl/teleport_config_builder'
 require 'emory/handlers/abstract_handler'
 
 module Emory
@@ -10,7 +11,7 @@ module Emory
       let(:dsl) { Dsl.new }
 
       context "class object" do
-        it "parses the supplied handler config and configures correct object types in frozen collections" do
+        it "parses the supplied teleport config and configures correct object types in frozen collections" do
           contents = <<-EOM
           require 'emory/handlers/abstract_handler'
 
@@ -20,7 +21,10 @@ module Emory
             events :all
           end
 
-          teleport '/path/to/dir', :something, ignore: %r{ignored/}, filter: /\.txt$/
+          teleport do
+            path '/path/to/dir'
+            handler :something
+          end
           EOM
 
           config = Dsl.instance_eval_emoryfile(contents, '/path/to/file')
@@ -57,34 +61,28 @@ module Emory
             dsl.handler {}
           }.should raise_error(DuplicateHandlerNameException)
         end
+
+        it "adds a handler to its list" do
+          builder = double('handler_builder')
+          handler = double('handler')
+          HandlerBuilder.should_receive(:new).and_return(builder)
+          builder.should_receive(:build).and_return(handler)
+          handler.should_receive(:name).exactly(3).times.and_return(:something)
+
+          dsl.handler {}
+          dsl.should have(1).handlers
+        end
       end
 
       context "'teleport' method" do
-        it "mandates referenced handlers must exist at the configuration time" do
-          proc {
-            dsl.teleport(nil, :something)
-          }.should raise_error(UndefinedTeleportHandlerException,
-                               /The handler ':something' wired to teleport could not be found/)
-        end
+        it "adds a teleport to its list" do
+          builder = double('teleport_builder')
+          teleport = double('teleport')
+          TeleportConfigBuilder.should_receive(:new).and_return(builder)
+          builder.should_receive(:build).and_return(teleport)
 
-        it "configures the teleport config with mandatory data" do
-          handler = Object.new
-          dsl.handlers[:something] = handler
-          dsl.teleport('/path/to/dir', :something)
+          dsl.teleport {}
           dsl.should have(1).teleports
-          dsl.teleports[0].watched_path.should == '/path/to/dir'
-          dsl.teleports[0].filter.should be_nil
-          dsl.teleports[0].ignore.should be_nil
-        end
-
-        it "configures the teleport config with optional data" do
-          handler = Object.new
-          dsl.handlers[:something] = handler
-          dsl.teleport('/path/to/dir', :something, ignore: %r{ignored/}, filter: /\.txt$/)
-          dsl.should have(1).teleports
-          dsl.teleports[0].watched_path.should == '/path/to/dir'
-          dsl.teleports[0].filter.should == /\.txt$/
-          dsl.teleports[0].ignore.should == %r{ignored/}
         end
       end
     end
