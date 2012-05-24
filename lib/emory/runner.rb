@@ -1,4 +1,5 @@
 require 'listen'
+require 'pathname'
 require 'emory/configuration_file'
 require 'emory/dsl/dsl'
 
@@ -21,7 +22,7 @@ module Emory
           config = DSL::Dsl.instance_eval_emoryfile(emory_config_contents, emory_config_file)
 
           LOGGER.debug('Configuring listeners')
-          configure_listeners(config)
+          configure_listeners(config, File.dirname(emory_config_file))
 
           Thread.current.join
         rescue Interrupt
@@ -33,9 +34,13 @@ module Emory
 
       private
       
-      def configure_listeners(config)
+      def configure_listeners(config, config_location)
+        LOGGER.debug("Config\'s directory is: #{config_location}")
         config.teleports.each do |teleport|
-          listener = Listen.to(teleport.watched_path)
+          watched_path = normalize_watched_path(config_location, teleport.watched_path)
+          LOGGER.info("Watching directory: #{watched_path}")
+
+          listener = Listen.to(watched_path)
           listener.ignore(teleport.ignore) unless teleport.ignore.nil?
           listener.filter(teleport.filter) unless teleport.filter.nil?
           listener.change(&get_handler_callback(teleport.handler))
@@ -56,6 +61,12 @@ module Emory
           paths.each { |path| handler.send(operation, path) } if handler.respond_to?(operation)
         end
       end
+
+      def normalize_watched_path(config_location, watched_path)
+        return watched_path if Pathname.new(watched_path).absolute?
+        File.expand_path(watched_path, config_location)
+      end
+
     end
   end
 
