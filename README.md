@@ -50,9 +50,18 @@ Example configuration:
 ```ruby
 require 'emory/handlers/stdout_handler'
 
-handler :simple, ::Emory::Handlers::StdoutHandler, actions: [:added, :removed]
+handler do
+  name :listener
+  implementation Emory::Handlers::StdoutHandler
+  events :all
+end
 
-teleport ['/path/to/watched/directory', '/path/to/another/watched/directory'], :simple
+teleport do
+  path '~/_emory-test/'
+  handler :listener
+  ignore %r{ignored/}
+  filter /\.txt$/
+end
 ```
 
 The gem supplies an executable file which scans for the configuration file in current directory
@@ -62,6 +71,10 @@ execution then proceed like your operating system allows you to (Ctrl-C, for exa
 ```bash
 $ emory
 ```
+
+Emory outputs some information into the console where it was launched from. However if you would
+like to consult more detailed information on what it's doing then feel free consult `emory.log`
+which is created in the same directory the `emory` command was launched from.
 
 <a name="emory-dsl" />
 Emory configuration DSL
