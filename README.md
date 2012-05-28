@@ -122,6 +122,8 @@ handler do
   implementation SomeCompany::Integration::SystemXHandler
   events :modified
   options host: 'host1.othercompany.com', port: 12345, username: 'bozo', password: 'p@ssw0rd'
+  # or the arrows syntax in Ruby 1.8
+  # options :host => 'host1.othercompany.com', :port => 12345, :username => 'bozo', :password => 'p@ssw0rd'
 end
 ```
 
