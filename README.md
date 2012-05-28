@@ -73,7 +73,7 @@ $ emory
 ```
 
 Emory outputs some information into the console where it was launched from. However if you would
-like to consult more detailed information on what it's doing then feel free consult `emory.log`
+like to consult more detailed information on what it's doing then feel free to consult `emory.log`
 which is created in the same directory the `emory` command was launched from.
 
 <a name="emory-dsl" />
@@ -86,23 +86,43 @@ The Emory configuration DSL is evaluated as plain Ruby, so you can use normal Ru
 <a name="emory-dsl-handler" />
 ### handler
 
-Handler yada-yada-yada
+A handler in Emory is an entity which knows how to react on file system modification events.
+By default only two are provided:
+
+* `Emory::Handlers::AbstractHandler` - defines common interface for other handlers to implement
+* `Emory::Handlers::StdoutHandler` - spits out some information on what/how changed to the standard output
+
+A handler can to be configured with 3 mandatory and 1 optional parameter:
+
+* mandatory
+** name - defines a name for the handler so that it could be used in other parts of the configuration
+** implementation - name of the specific class that conforms to `Emory::Handlers::AbstractHandler`'s interface
+** events - a comma separated list of events the handler should react to (:added, :modified, :removed)
+while ignoring the ones not mentioned. There's also an :all shortcut to indicate all events without
+explicitly writing them.
+* optional
+** options - a hash of optional data that will be passed on during handler's construction. Please
+note that the handler's class needs to know how to treat these otherwise it's a no-op. For example,
+`Emory::Handlers::StdoutHandler` does not know how to deal with the options so it would just ignore them.
+
+Some example of defining handlers
 
 ```ruby
 require 'emory/handlers/stdout_handler'
+require 'some_company/integration/system_x_handler'
 
-handler :noop,
-        ::Emory::Handlers::StdoutHandler,
-        actions: [:added, :removed]
-```
+handler do
+  name :stdout_handler
+  implementation Emory::Handlers::StdoutHandler
+  events :added, :removed
+end
 
-```ruby
-require 'emory/handlers/some_other_handler'
-
-handler :hndlr,
-        ::Emory::Handlers::SomeOtherHandler,
-        actions: [:all],
-        options: {host: 'localhost', port: '8080', path: '/some/remote/root/path'}
+handler do
+  name :integration_handler
+  implementation SomeCompany::Integration::SystemXHandler
+  events :modified
+  options host: 'host1.othercompany.com', port: 12345, username: 'bozo', password: 'p@ssw0rd'
+end
 ```
 
 <a name="emory-dsl-teleport" />
