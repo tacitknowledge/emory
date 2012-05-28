@@ -92,20 +92,19 @@ By default only two are provided:
 - `Emory::Handlers::AbstractHandler` - defines common interface for other handlers to implement
 - `Emory::Handlers::StdoutHandler` - spits out some information on what/how changed to the standard output
 
-
 A handler can be configured with 3 mandatory and 1 optional parameter:
 
 - mandatory
     - name - defines a name for the handler so that it could be used in other parts of the configuration
     - implementation - name of the specific class that conforms to `Emory::Handlers::AbstractHandler`'s interface
-    - events - a comma separated list of events the handler should react to (**:added**, **:modified**, **:removed**)
-while ignoring the ones not mentioned. There's also an **:all** shortcut to indicate all events without
-explicitly writing them.
+    - events - a comma separated list of events the handler should react to (**:added**,
+    **:modified**, **:removed**) while ignoring the ones not mentioned. There's also an **:all**
+    shortcut to indicate all events without explicitly writing them.
 - optional
     - options - a hash of optional data that will be passed on during handler's construction. Please
-note that the handler's class needs to know how to treat these otherwise it's a no-op. For example,
-`Emory::Handlers::StdoutHandler` does not know how to deal with the options so it would just ignore them.
-
+    note that the handler's class needs to know how to treat these otherwise it's a no-op. For
+    example, `Emory::Handlers::StdoutHandler` does not know how to deal with the options so it would
+    just ignore them.
 
 Some examples of defining handlers
 
@@ -132,12 +131,30 @@ end
 <a name="emory-dsl-teleport" />
 ### teleport
 
-Teleport yada-yada-yada
+A teleport in Emory is an entity that knows that it needs to monitor some path (including sub-directories)
+and notify the linked handler if something interesting happens. A teleport can be configured with
+2 mandatory and 2 optional parameters:
+
+- mandatory
+    - path - the path to monitor (including its sub-directories). Can be either absolute or relative
+    to the location of the config
+    - handler - the handler to invoke/notify when the filesystem events occur in the path supplied above
+- optional
+    - ignore - the regex patterns that need to be ignored by the teleport
+    - filter - the regex patterns that filter out unwanted monitoring events
+
+An example teleport definition:
 
 ```ruby
-teleport ['/path/to/watched/directory', '/path/to/another/watched/directory'],
-         :desired_handler,
-         options: {ignore: %r{^ignored/path/}, filter: /\.rb$/}
+# Will monitor file system events starting under <config_location>/ftp/incoming/x/ directory,
+# but will ignore paths containing reconciled/ and pending/ directories, and additionaly will
+# apply only to .txt files. Once events are identified will notify the handler named :integration_handler.
+teleport do
+  path 'ftp/incoming/x'
+  handler :integration_handler
+  ignore %r{reconciled/ pending/}
+  filter /\.txt$/
+end
 ```
 
 <a name="contributing" />
