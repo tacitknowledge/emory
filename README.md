@@ -89,10 +89,10 @@ The Emory configuration DSL is evaluated as plain Ruby, so you can use normal Ru
 A handler in Emory is an entity which knows how to react on file system modification events.
 By default only two are provided:
 
-* `Emory::Handlers::AbstractHandler` - defines common interface for other handlers to implement
-* `Emory::Handlers::StdoutHandler` - spits out some information on what/how changed to the standard output
+- `Emory::Handlers::AbstractHandler` - defines common interface for other handlers to implement
+- `Emory::Handlers::StdoutHandler` - spits out some information on what/how changed to the standard output
 
-A handler can to be configured with 3 mandatory and 1 optional parameter:
+A handler can be configured with 3 mandatory and 1 optional parameter:
 
 - mandatory
     - name - defines a name for the handler so that it could be used in other parts of the configuration
