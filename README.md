@@ -137,7 +137,7 @@ and notify the linked handler if something interesting happens. A teleport can b
 
 - mandatory
     - path - the path to monitor (including its sub-directories). Can be either absolute or relative
-    to the location of the config
+    to the location of the configuration file (`.emory`).
     - handler - the handler to invoke/notify when the filesystem events occur in the path supplied above
 - optional
     - ignore - the regex patterns that need to be ignored by the teleport
