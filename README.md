@@ -97,8 +97,8 @@ A handler can be configured with 3 mandatory and 1 optional parameter:
 - mandatory
     - name - defines a name for the handler so that it could be used in other parts of the configuration
     - implementation - name of the specific class that conforms to `Emory::Handlers::AbstractHandler`'s interface
-    - events - a comma separated list of events the handler should react to (*:added*, *:modified*, *:removed*)
-while ignoring the ones not mentioned. There's also an *:all* shortcut to indicate all events without
+    - events - a comma separated list of events the handler should react to (**:added**, **:modified**, **:removed**)
+while ignoring the ones not mentioned. There's also an **:all** shortcut to indicate all events without
 explicitly writing them.
 - optional
     - options - a hash of optional data that will be passed on during handler's construction. Please
