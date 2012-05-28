@@ -105,7 +105,7 @@ explicitly writing them.
 note that the handler's class needs to know how to treat these otherwise it's a no-op. For example,
 `Emory::Handlers::StdoutHandler` does not know how to deal with the options so it would just ignore them.
 
-Some example of defining handlers
+Some examples of defining handlers
 
 ```ruby
 require 'emory/handlers/stdout_handler'
