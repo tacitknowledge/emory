@@ -154,4 +154,8 @@ Authors
 
 * [Scott Askew](https://github.com/scottfromsf)
 * [Vladislav Gangan](https://github.com/vgangan)
+
+Contributors
+------------
+
 * [Ion Lenta](https://github.com/noi)
