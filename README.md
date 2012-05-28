@@ -92,6 +92,7 @@ By default only two are provided:
 - `Emory::Handlers::AbstractHandler` - defines common interface for other handlers to implement
 - `Emory::Handlers::StdoutHandler` - spits out some information on what/how changed to the standard output
 
+
 A handler can be configured with 3 mandatory and 1 optional parameter:
 
 - mandatory
@@ -104,6 +105,7 @@ explicitly writing them.
     - options - a hash of optional data that will be passed on during handler's construction. Please
 note that the handler's class needs to know how to treat these otherwise it's a no-op. For example,
 `Emory::Handlers::StdoutHandler` does not know how to deal with the options so it would just ignore them.
+
 
 Some examples of defining handlers
 
