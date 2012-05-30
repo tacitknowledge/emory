@@ -171,10 +171,10 @@ Contributing
 Authors
 -------
 
-* [Scott Askew](https://github.com/scottfromsf)
 * [Vladislav Gangan](https://github.com/vgangan)
 
 Contributors
 ------------
 
+* [Scott Askew](https://github.com/scottfromsf)
 * [Ion Lenta](https://github.com/noi)
