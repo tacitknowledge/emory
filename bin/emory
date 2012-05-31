@@ -3,6 +3,12 @@
 require 'logging'
 require 'emory/runner'
 
-Logging.logger.root.add_appenders(Logging.appenders.stdout(level: :info))
+logging_lines_colors = {debug: :green, info: :light_green, warn: :yellow, error: :red, fatal: [:white, :on_red]}
+Logging.color_scheme('bright', lines: logging_lines_colors)
+
+logging_layouts_pattern = Logging.layouts.pattern(color_scheme: 'bright', pattern: '[%d] %-5l %c: %m\n')
+Logging.appenders.stdout('stdout', layout: logging_layouts_pattern, level: :info)
+
+Logging.logger.root.add_appenders('stdout')
 
 Emory::Runner.start
