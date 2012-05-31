@@ -1,0 +1,15 @@
+require 'emory/handlers/stdout_handler'
+
+# Define a handler emits any file add/modify/delete in ./src to STDOUT.
+handler do
+  name :stdout
+  implementation Emory::Handlers::StdoutHandler
+  events :all
+end
+
+# Map ./src to the handler defined above. Note that the 'path' is relative
+# to the location .emory (i.e. this file)
+teleport do
+  path 'src'
+  handler :stdout
+end
