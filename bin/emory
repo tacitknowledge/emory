@@ -3,12 +3,17 @@
 require 'optparse'
 require 'logging'
 require 'emory/runner'
+require 'emory/version'
 
 options = {}
 OptionParser.new do |opts|
   options[:log_level] = :info
   opts.on('-d', '--debug', "Display debug output") do
     options[:log_level] = :debug
+  end
+  opts.on('-v', '--version', 'Display version information') do
+    puts "Emory version #{Emory::VERSION}"
+    exit
   end
 end.parse!
 
