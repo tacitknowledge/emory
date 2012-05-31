@@ -70,6 +70,8 @@ execution then proceed like your operating system allows you to (Ctrl-C, for exa
 
 ```bash
 $ emory
+[2012-05-31 12:08:23] INFO  Emory::ConfigurationFile: Found config file: /Users/xxx/.emory
+[2012-05-31 12:08:23] INFO  Emory::Runner: Watching directory: /Users/xxx/_emory-test
 ```
 
 Emory outputs some information into the console where it was launched from. However if you would
@@ -84,6 +86,7 @@ $ emory --debug
 [2012-05-31 12:08:29] INFO  Emory::ConfigurationFile: Found config file: /Users/xxx/.emory
 [2012-05-31 12:08:29] DEBUG Emory::Runner: Reading configuration file contents
 [2012-05-31 12:08:29] DEBUG Emory::Runner: Evaluating configuration file contents:
+<<< the rest of the output is ommitted >>>
 ```
 
 <a name="emory-dsl" />
