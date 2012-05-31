@@ -27,6 +27,8 @@ module Emory
           Thread.current.join
         rescue Interrupt
           LOGGER.info('Shutting down Emory')
+        rescue EmoryConfigurationFileNotFoundException => fileNotFoundException
+          LOGGER.error("#{fileNotFoundException.message}. Please refer to http://tacitknowledge.com/emory for information on how to use Emory.")
         rescue Exception => e
           LOGGER.error(e)
         end
