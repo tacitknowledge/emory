@@ -73,8 +73,18 @@ $ emory
 ```
 
 Emory outputs some information into the console where it was launched from. However if you would
-like to consult more detailed information on what it's doing then feel free to consult `emory.log`
-which is created in the same directory the `emory` command was launched from.
+like to consult more detailed information on what it's doing then feel free to supply `-d` or
+`--debug` when launching it like in this example:
+
+```bash
+$ emory --debug
+[2012-05-31 12:08:29] DEBUG Emory::Runner: Looking for the configuration file
+[2012-05-31 12:08:29] DEBUG Emory::ConfigurationFile: Examining directory: /Users/xxx/Projects
+[2012-05-31 12:08:29] DEBUG Emory::ConfigurationFile: Examining directory: /Users/xxx
+[2012-05-31 12:08:29] INFO  Emory::ConfigurationFile: Found config file: /Users/xxx/.emory
+[2012-05-31 12:08:29] DEBUG Emory::Runner: Reading configuration file contents
+[2012-05-31 12:08:29] DEBUG Emory::Runner: Evaluating configuration file contents:
+```
 
 <a name="emory-dsl" />
 Emory configuration DSL
