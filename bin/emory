@@ -15,6 +15,10 @@ OptionParser.new do |opts|
     puts "Emory version #{Emory::VERSION}"
     exit
   end
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
 end.parse!
 
 logging_lines_colors = {debug: :green, info: :light_green, warn: :yellow, error: :red, fatal: [:white, :on_red]}
