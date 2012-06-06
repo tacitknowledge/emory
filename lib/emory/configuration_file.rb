@@ -1,4 +1,5 @@
 require 'pathname'
+require 'logging'
 
 module Emory
 

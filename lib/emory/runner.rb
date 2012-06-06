@@ -46,7 +46,7 @@ module Emory
           listener.ignore(teleport.ignore) unless teleport.ignore.nil?
           listener.filter(teleport.filter) unless teleport.filter.nil?
           listener.change(&get_handler_callback(teleport.handler))
-          listener.start(false)
+          listener.start(true)
         end
       end
 

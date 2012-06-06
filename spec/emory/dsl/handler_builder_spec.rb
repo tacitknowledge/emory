@@ -91,10 +91,10 @@ module Emory
           name :test_handler
           implementation ::Emory::Handlers::StdoutHandler
           events :all
-          options host: 'localhost', port: '8080'
+          options :host => 'localhost', :port => '8080'
         }
 
-        Emory::Handlers::StdoutHandler.should_receive(:new).with(:test_handler, {host: 'localhost', port: '8080'})
+        Emory::Handlers::StdoutHandler.should_receive(:new).with(:test_handler, {:host => 'localhost', :port => '8080'})
 
         builder = HandlerBuilder.new(&p)
         builder.build
