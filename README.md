@@ -1,4 +1,4 @@
-Emory
+Emory [![Build Status](https://secure.travis-ci.org/tacitknowledge/emory.png?branch=master)](http://travis-ci.org/tacitknowledge/emory)
 =====
 
 The Emory gem listens to file modifications and runs an action against it (for example, upload to a remote location).
