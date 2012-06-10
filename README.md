@@ -11,7 +11,6 @@ Contents
 * [Emory configuration DSL](#emory-dsl)
   * [handler](#emory-dsl-handler)
   * [teleport](#emory-dsl-teleport)
-* [About the name](#about-the-name)
 * [Contributing](#contributing)
 * [Authors](#authors)
 
@@ -170,14 +169,6 @@ teleport do
   filter /\.txt$/
 end
 ```
-<a name="about-the-name" />
-About the name
---------------
-
-This is about to get geeky: According to Star Trek trivia, Dr. Emory Erickson was the inventor
-of the transporter and also the first person to be transported. Emory is also a decently short
-name that's easy to remember and doesn't conflict with any other gems. That's about all the thought
-that went into it.
 
 <a name="contributing" />
 Contributing
