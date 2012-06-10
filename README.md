@@ -6,7 +6,7 @@ The Emory gem listens to file modifications and runs an action against it (for e
 Contents
 --------
 
-* [Requirements](#Requirements)
+* [Requirements](#requirements)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Emory configuration DSL](#emory-dsl)
