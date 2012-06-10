@@ -6,6 +6,7 @@ The Emory gem listens to file modifications and runs an action against it (for e
 Contents
 --------
 
+* [Requirements](#Requirements)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Emory configuration DSL](#emory-dsl)
@@ -13,6 +14,13 @@ Contents
   * [teleport](#emory-dsl-teleport)
 * [Contributing](#contributing)
 * [Authors](#authors)
+
+<a name="requirements" />
+Requirements
+------------
+
+Currently Emory requires Ruby 1.9.3. Work is underway to support 1.8.7
+as well as JRuby.
 
 <a name="installation" />
 Installation
