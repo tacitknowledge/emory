@@ -33,9 +33,7 @@ module Emory
         mock_listener.should_receive(:change)
         mock_listener.should_receive(:start).with(false)
 
-        mock_thread = double("thread")
-        Thread.stub(:current => mock_thread)
-        mock_thread.should_receive(:join)
+        Thread.should_receive(:stop).once
 
         Runner.start
       end
@@ -64,9 +62,7 @@ module Emory
         mock_listener.should_receive(:change)
         mock_listener.should_receive(:start).with(false)
 
-        mock_thread = double("thread")
-        Thread.stub(:current => mock_thread)
-        mock_thread.should_receive(:join)
+        Thread.should_receive(:stop).once
 
         Runner.start
       end

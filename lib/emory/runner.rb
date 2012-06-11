@@ -24,7 +24,7 @@ module Emory
           LOGGER.debug('Configuring listeners')
           configure_listeners(config, File.dirname(emory_config_file))
 
-          Thread.current.join
+          Thread.stop
         rescue Interrupt
           LOGGER.info('Shutting down Emory')
         rescue EmoryConfigurationFileNotFoundException => fileNotFoundException
