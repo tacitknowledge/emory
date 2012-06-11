@@ -20,8 +20,10 @@ Contents
 Requirements
 ------------
 
-Currently Emory requires Ruby 1.9.3. Work is underway to support 1.8.7
-as well as JRuby.
+Currently Emory works under:
+* Ruby 1.8.7
+* Ruby 1.9.3
+* JRuby (in 1.8 and 1.9 modes under Oracle JDK)
 
 <a name="installation" />
 Installation
