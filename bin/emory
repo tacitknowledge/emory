@@ -21,11 +21,11 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-logging_lines_colors = {debug: :green, info: :light_green, warn: :yellow, error: :red, fatal: [:white, :on_red]}
-Logging.color_scheme('bright', lines: logging_lines_colors)
+logging_lines_colors = {:debug => :green, :info => :light_green, :warn => :yellow, :error => :red, :fatal => [:white, :on_red]}
+Logging.color_scheme('bright', :lines => logging_lines_colors)
 
-logging_layouts_pattern = Logging.layouts.pattern(color_scheme: 'bright', pattern: '[%d] %-5l %c: %m\n')
-Logging.appenders.stdout('stdout', layout: logging_layouts_pattern, level: options[:log_level])
+logging_layouts_pattern = Logging.layouts.pattern(:color_scheme => 'bright', :pattern => '[%d] %-5l %c: %m\n')
+Logging.appenders.stdout('stdout', :layout => logging_layouts_pattern, :level => options[:log_level])
 
 Logging.logger.root.add_appenders('stdout')
 

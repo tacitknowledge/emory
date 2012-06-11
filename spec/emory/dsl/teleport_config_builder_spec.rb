@@ -15,7 +15,7 @@ module Emory
       it "mandates a handler reference to be supplied" do
         p = proc {}
 
-        handlers = {test_handler: Object.new}
+        handlers = {:test_handler => Object.new}
         builder = TeleportConfigBuilder.new(handlers, &p)
         proc {
           builder.build
@@ -27,7 +27,7 @@ module Emory
           handler :does_not_exist
         }
 
-        handlers = {test_handler: Object.new}
+        handlers = {:test_handler => Object.new}
         builder = TeleportConfigBuilder.new(handlers, &p)
         proc {
           builder.build
@@ -39,7 +39,7 @@ module Emory
           handler :test_handler
         }
 
-        handlers = {test_handler: Object.new}
+        handlers = {:test_handler => Object.new}
         builder = TeleportConfigBuilder.new(handlers, &p)
         proc {
           builder.build
@@ -53,7 +53,7 @@ module Emory
         }
 
         handler = Object.new
-        handlers = {test_handler: handler}
+        handlers = {:test_handler => handler}
         builder = TeleportConfigBuilder.new(handlers, &p)
 
         teleport = builder.build
@@ -70,7 +70,7 @@ module Emory
         }
 
         handler = Object.new
-        handlers = {test_handler: handler}
+        handlers = {:test_handler => handler}
         builder = TeleportConfigBuilder.new(handlers, &p)
 
         teleport = builder.build
@@ -88,7 +88,7 @@ module Emory
         }
 
         handler = Object.new
-        handlers = {test_handler: handler}
+        handlers = {:test_handler => handler}
         builder = TeleportConfigBuilder.new(handlers, &p)
 
         teleport = builder.build
@@ -103,7 +103,7 @@ module Emory
         }
 
         handler = Object.new
-        handlers = {test_handler: handler}
+        handlers = {:test_handler => handler}
         builder = TeleportConfigBuilder.new(handlers, &p)
 
         teleport = builder.build
