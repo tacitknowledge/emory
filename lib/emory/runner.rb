@@ -42,11 +42,10 @@ module Emory
           watched_path = normalize_watched_path(config_location, teleport.watched_path)
           LOGGER.info("Watching directory: #{watched_path}")
 
-          listener = Listen.to(watched_path)
+          listener = Listen.to(watched_path, &get_handler_callback(teleport.handler))
           listener.ignore(teleport.ignore) unless teleport.ignore.nil?
-          listener.filter(teleport.filter) unless teleport.filter.nil?
-          listener.change(&get_handler_callback(teleport.handler))
-          listener.start(false)
+          listener.only(teleport.filter) unless teleport.filter.nil?
+          listener.start
         end
       end
 
