@@ -31,7 +31,7 @@ module Emory
         mock_listener.should_receive(:ignore).with(teleport.ignore)
         mock_listener.should_receive(:filter).with(teleport.filter)
         mock_listener.should_receive(:change)
-        mock_listener.should_receive(:start).with(false)
+        mock_listener.should_receive(:start)
 
         Thread.should_receive(:stop).once
 
@@ -60,7 +60,7 @@ module Emory
         mock_listener.should_receive(:ignore).with(teleport.ignore)
         mock_listener.should_receive(:filter).with(teleport.filter)
         mock_listener.should_receive(:change)
-        mock_listener.should_receive(:start).with(false)
+        mock_listener.should_receive(:start)
 
         Thread.should_receive(:stop).once
 
