@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '~> 0.6.4' if RUBY_VERSION =~ /1.9/
   s.add_development_dependency 'rake'
 
-  s.add_runtime_dependency 'logging', '1.8.2'
-  s.add_runtime_dependency 'listen', '2.7.0'
+  s.add_runtime_dependency 'logging'
+  s.add_runtime_dependency 'listen'
 end
