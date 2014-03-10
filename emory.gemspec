@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.test_files    = Dir.glob("{spec,test}/**/*.rb")
   s.require_paths = ["lib"]
   
-  s.add_development_dependency 'rspec', '~> 2.10'
-  s.add_development_dependency 'simplecov', '~> 0.6.4' if RUBY_VERSION =~ /1.9/
+  s.add_development_dependency 'rspec', '2.14.1'
+  s.add_development_dependency 'simplecov', '0.8.2' if RUBY_VERSION =~ /1.9/
   s.add_development_dependency 'rake'
 
   s.add_runtime_dependency 'logging', '1.8.2'
