@@ -1,4 +1,4 @@
-Emory [![Build Status](https://secure.travis-ci.org/tacitknowledge/emory.png?branch=master)](http://travis-ci.org/tacitknowledge/emory)
+Emory [![Build Status](https://secure.travis-ci.org/tacitknowledge/emory.png?branch=master)](http://travis-ci.org/tacitknowledge/emory) [![emory API Documentation](https://www.omniref.com/ruby/gems/emory.png)](https://www.omniref.com/ruby/gems/emory)
 =====
 
 The Emory gem listens to file modifications and runs an action against it (for example, upload to a remote location).
